@@ -2,7 +2,7 @@ package org.example.model;
 
 import java.util.*;
 
-import org.example.worttrainer.persistence.PersistenceManager;
+import org.example.persistence.PersistenceManager;
 
 /**
  * Repräsentiert den Rechtschreibtrainer.
