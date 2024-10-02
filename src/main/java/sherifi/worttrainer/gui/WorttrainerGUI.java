@@ -1,5 +1,6 @@
 package sherifi.worttrainer.gui;
 
+import org.json.JSONException;
 import sherifi.worttrainer.model.WortBildPaar;
 import sherifi.worttrainer.persistence.JsonPersistenzService;
 import sherifi.worttrainer.persistence.PersistenzService;
@@ -15,7 +16,7 @@ public class WorttrainerGUI {
     private WorttrainerService worttrainerService;
     private PersistenzService persistenzService;
 
-    public WorttrainerGUI() {
+    public WorttrainerGUI() throws JSONException {
         persistenzService = new JsonPersistenzService("worttrainer.json");
         worttrainerService = persistenzService.laden();
         if (worttrainerService == null) {
@@ -31,7 +32,7 @@ public class WorttrainerGUI {
         }
     }
 
-    public void starten() {
+    public void starten() throws JSONException {
         boolean weitermachen = true;
         while (weitermachen) {
             // Wähle zufälliges WortBildPaar
