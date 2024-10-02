@@ -25,7 +25,11 @@ public class WorttrainerGUI {
             try {
                 worttrainerService.addWortBildPaar(new WortBildPaar("Hund", "https://via.placeholder.com/150?text=Hund"));
                 worttrainerService.addWortBildPaar(new WortBildPaar("Katze", "https://via.placeholder.com/150?text=Katze"));
+                worttrainerService.addWortBildPaar(new WortBildPaar("Baum", "https://via.placeholder.com/150?text=Baum"));
                 worttrainerService.addWortBildPaar(new WortBildPaar("Auto", "https://via.placeholder.com/150?text=Auto"));
+                worttrainerService.addWortBildPaar(new WortBildPaar("Sherifi", "https://via.placeholder.com/150?text=Sherifi"));
+                worttrainerService.addWortBildPaar(new WortBildPaar("SEW", "https://via.placeholder.com/150?text=SEW"));
+                worttrainerService.addWortBildPaar(new WortBildPaar("Test", "https://via.placeholder.com/150?text=Test"));
             } catch (Exception e) {
                 e.printStackTrace();
             }
