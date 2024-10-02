@@ -16,6 +16,10 @@ public class WorttrainerGUI {
     private WorttrainerService worttrainerService;
     private PersistenzService persistenzService;
 
+    /**
+     * GUI Methode, startet das Programm
+     * @throws JSONException
+     */
     public WorttrainerGUI() throws JSONException {
         persistenzService = new JsonPersistenzService("worttrainer.json");
         worttrainerService = persistenzService.laden();
@@ -36,6 +40,10 @@ public class WorttrainerGUI {
         }
     }
 
+    /**
+     * Startet den Worttrainer und lässt den User beginnen
+     * @throws JSONException
+     */
     public void starten() throws JSONException {
         boolean weitermachen = true;
         while (weitermachen) {
@@ -73,6 +81,11 @@ public class WorttrainerGUI {
         persistenzService.speichern(worttrainerService);
     }
 
+    /**
+     * Zeigt die Statistiken an
+     * @param ersterVersuch die Richtigkeit des Versuches
+     * @return
+     */
     private String erstelleNachricht(boolean ersterVersuch) {
         StringBuilder sb = new StringBuilder();
         sb.append("Statistik:\n");

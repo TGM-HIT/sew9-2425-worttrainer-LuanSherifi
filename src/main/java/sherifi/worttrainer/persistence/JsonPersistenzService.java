@@ -70,6 +70,11 @@ public class JsonPersistenzService implements PersistenzService {
         }
     }
 
+    /**
+     * Lädt den Worttrainer mit den Daten vom JSON File
+     * @return Die Daten im File
+     * @throws JSONException
+     */
     @Override
     public WorttrainerService laden() throws JSONException {
         File file = new File(dateiPfad);
