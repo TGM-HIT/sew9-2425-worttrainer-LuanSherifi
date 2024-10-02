@@ -1,0 +1,85 @@
+@startuml
+title UML-Design - Finale Version - Luan Sherifi
+
+package "model" {
+    class WortBildPaar {
+        - wort : String
+        - bildUrl : URL
+        + WortBildPaar(wort : String, bildUrlString : String)
+        + getWort() : String
+        + setWort(wort : String)
+        + getBildUrl() : URL
+        + setBildUrl(bildUrlString : String)
+    }
+
+    class Statistik {
+        - gesamtVersuche : int
+        - richtigeVersuche : int
+        - falscheVersuche : int
+        + Statistik()
+        + getGesamtVersuche() : int
+        + getRichtigeVersuche() : int
+        + getFalscheVersuche() : int
+        + erhoeheGesamtVersuche()
+        + erhoeheRichtigeVersuche()
+        + erhoeheFalscheVersuche()
+    }
+}
+
+package "service" {
+    class WorttrainerService {
+        - wortBildPaare : List<WortBildPaar>
+        - aktuellesPaar : WortBildPaar
+        - statistik : Statistik
+        - letzterVersuchRichtig : boolean
+        + WorttrainerService()
+        + addWortBildPaar(paar : WortBildPaar)
+        + waehlePaar(index : int)
+        + waehleZufaelligesPaar()
+        + getAktuellesPaar() : WortBildPaar
+        + rateWort(eingabe : String) : boolean
+        + getStatistik() : Statistik
+        + isLetzterVersuchRichtig() : boolean
+        + istPaarAusgewaehlt() : boolean
+    }
+}
+
+package "persistence" {
+    interface PersistenzService {
+        + speichern(worttrainerService : WorttrainerService)
+        + laden() : WorttrainerService
+    }
+
+    class JsonPersistenzService {
+        - dateiPfad : String
+        + JsonPersistenzService(dateiPfad : String)
+        + speichern(worttrainerService : WorttrainerService)
+        + laden() : WorttrainerService
+    }
+
+    JsonPersistenzService ..|> PersistenzService
+}
+
+package "gui" {
+    class WorttrainerGUI {
+        - worttrainerService : WorttrainerService
+        - persistenzService : PersistenzService
+        + WorttrainerGUI()
+        + starten()
+    }
+}
+
+class WorttrainerApplication {
+    + main(args : String[])
+}
+
+' Beziehungen
+WorttrainerService "1" --> "*" WortBildPaar
+WorttrainerService "1" --> "1" Statistik
+
+WorttrainerGUI "1" --> "1" WorttrainerService
+WorttrainerGUI "1" --> "1" PersistenzService
+
+WorttrainerApplication ..> WorttrainerGUI
+
+@enduml
