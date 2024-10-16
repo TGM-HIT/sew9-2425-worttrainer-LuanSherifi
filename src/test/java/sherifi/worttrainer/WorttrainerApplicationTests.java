@@ -27,9 +27,9 @@ public class WorttrainerApplicationTests {
 	@BeforeEach
 	public void setUp() throws MalformedURLException {
 		worttrainerService = new WorttrainerService();
-		worttrainerService.addWortBildPaar(new WortBildPaar("Hund", "https://via.placeholder.com/150?text=Hund"));
-		worttrainerService.addWortBildPaar(new WortBildPaar("Katze", "https://via.placeholder.com/150?text=Katze"));
-		worttrainerService.addWortBildPaar(new WortBildPaar("Auto", "https://via.placeholder.com/150?text=Auto"));
+		worttrainerService.addWortBildPaar(new WortBildPaar("Hund", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgQmEm06BSRd0EopLiNYprCoHc15FkT37RBQ&s"));
+		worttrainerService.addWortBildPaar(new WortBildPaar("Katze", "https://media.os.fressnapf.com/cms/2021/05/katze_gefunde_zugelaufen_1200x527.jpg?t=seoimgsqr_527"));
+		worttrainerService.addWortBildPaar(new WortBildPaar("Auto", "https://www.autoscout24.at/cms-content-assets/4mpSnBCf7cpBksE9w2nKmf-7d11ffa37ae4a3d95ae4823031e282f9-5kK7vUN4DMykm4fhsi0Pc-b1070949849a06dd22109fab7a99b8a2-lamborghini-huracan-tecnica-front-1100-1100.jpeg"));
 	}
 
 	/**
@@ -37,9 +37,9 @@ public class WorttrainerApplicationTests {
 	 */
 	@Test
 	public void testWortBildPaarValid() throws MalformedURLException {
-		WortBildPaar paar = new WortBildPaar("Baum", "https://via.placeholder.com/150?text=Baum");
+		WortBildPaar paar = new WortBildPaar("Baum", "https://nikinclothing.com/cdn/shop/articles/der-baum-ein-meisterwerk-der-natur-356835.jpg?v=1713177674");
 		assertEquals("Baum", paar.getWort());
-		assertEquals("https://via.placeholder.com/150?text=Baum", paar.getBildUrl().toString());
+		assertEquals("https://nikinclothing.com/cdn/shop/articles/der-baum-ein-meisterwerk-der-natur-356835.jpg?v=1713177674", paar.getBildUrl().toString());
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class WorttrainerApplicationTests {
 	@Test
 	public void testWortBildPaarInvalidWort() {
 		assertThrows(IllegalArgumentException.class, () -> {
-			new WortBildPaar(null, "https://via.placeholder.com/150?text=Baum");
+			new WortBildPaar(null, "https://nikinclothing.com/cdn/shop/articles/der-baum-ein-meisterwerk-der-natur-356835.jpg?v=1713177674");
 		});
 	}
 
@@ -103,7 +103,7 @@ public class WorttrainerApplicationTests {
 	@Test
 	public void testWorttrainerServiceAddPaar() throws MalformedURLException {
 		int initialSize = worttrainerService.getWortBildPaare().size();
-		worttrainerService.addWortBildPaar(new WortBildPaar("Blume", "https://via.placeholder.com/150?text=Blume"));
+		worttrainerService.addWortBildPaar(new WortBildPaar("Baum", "https://nikinclothing.com/cdn/shop/articles/der-baum-ein-meisterwerk-der-natur-356835.jpg?v=1713177674"));
 		assertEquals(initialSize + 1, worttrainerService.getWortBildPaare().size());
 	}
 
@@ -190,12 +190,12 @@ public class WorttrainerApplicationTests {
 	public void testPersistenzServiceSpeichernUndLaden() throws MalformedURLException, JSONException {
 		// Erstelle ein neues WorttrainerService-Objekt
 		WorttrainerService originalService = new WorttrainerService();
-		originalService.addWortBildPaar(new WortBildPaar("Baum", "https://via.placeholder.com/150?text=Baum"));
-		originalService.addWortBildPaar(new WortBildPaar("Haus", "https://via.placeholder.com/150?text=Haus"));
+		originalService.addWortBildPaar(new WortBildPaar("Baum", "https://nikinclothing.com/cdn/shop/articles/der-baum-ein-meisterwerk-der-natur-356835.jpg?v=1713177674"));
+		originalService.addWortBildPaar(new WortBildPaar("Auto", "https://www.autoscout24.at/cms-content-assets/4mpSnBCf7cpBksE9w2nKmf-7d11ffa37ae4a3d95ae4823031e282f9-5kK7vUN4DMykm4fhsi0Pc-b1070949849a06dd22109fab7a99b8a2-lamborghini-huracan-tecnica-front-1100-1100.jpeg"));
 		originalService.waehlePaar(1);
-		originalService.rateWort("Haus"); // Richtige Antwort
+		originalService.rateWort("Auto"); // Richtige Antwort
 		originalService.waehlePaar(0);
-		originalService.rateWort("Hause"); // Falsche Antwort
+		originalService.rateWort("Autos"); // Falsche Antwort
 
 		// Speichere den Zustand
 		PersistenzService persistenzService = new JsonPersistenzService("test_worttrainer.json");
