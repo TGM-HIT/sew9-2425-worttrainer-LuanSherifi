@@ -2,6 +2,8 @@ package sherifi.worttrainer.service;
 
 import sherifi.worttrainer.model.Statistik;
 import sherifi.worttrainer.model.WortBildPaar;
+import sherifi.worttrainer.persistence.PersistenzService;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +17,44 @@ public class WorttrainerService {
     private WortBildPaar aktuellesPaar;
     private Statistik statistik;
     private boolean letzterVersuchRichtig;
+    private PersistenzService persistenzService;
 
+    /**
+     * Standardkonstruktor.
+     */
     public WorttrainerService() {
         this.wortBildPaare = new ArrayList<>();
         this.aktuellesPaar = null;
         this.statistik = new Statistik();
         this.letzterVersuchRichtig = false;
+        this.persistenzService = null;
     }
+
+    /**
+     * Setter für PersistenzService.
+     *
+     * @param persistenzService das PersistenzService
+     */
+    public void setPersistenzService(PersistenzService persistenzService) {
+        if (persistenzService == null) {
+            throw new IllegalArgumentException("PersistenzService darf nicht null sein.");
+        }
+        this.persistenzService = persistenzService;
+    }
+
+    /**
+     * Speichert den aktuellen Zustand des Worttrainers.
+     *
+     * @throws JSONException falls ein JSON-Fehler auftritt
+     */
+    public void speichern() throws JSONException {
+        if (persistenzService == null) {
+            throw new IllegalStateException("PersistenzService ist nicht gesetzt.");
+        }
+        persistenzService.speichern(this);
+    }
+
+    // Bestehende Methoden bleiben unverändert
 
     public void addWortBildPaar(WortBildPaar paar) {
         if (paar == null) {

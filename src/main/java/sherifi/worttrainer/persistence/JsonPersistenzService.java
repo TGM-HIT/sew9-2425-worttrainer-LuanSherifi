@@ -1,16 +1,15 @@
 package sherifi.worttrainer.persistence;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import sherifi.worttrainer.model.Statistik;
 import sherifi.worttrainer.model.WortBildPaar;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import sherifi.worttrainer.service.WorttrainerService;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -72,6 +71,7 @@ public class JsonPersistenzService implements PersistenzService {
 
     /**
      * Lädt den Worttrainer mit den Daten vom JSON File
+     *
      * @return Die Daten im File
      * @throws JSONException
      */
